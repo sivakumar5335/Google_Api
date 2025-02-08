@@ -1,0 +1,109 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload to Google Drive</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    input[type="file"] {
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #357AE8;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Upload File to Google Drive</h1>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput" required>
+    <br>
+    <button type="submit">Upload to Drive</button>
+  </form>
+
+  <script>
+    const uploadForm = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('fileInput');
+
+    uploadForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const file = fileInput.files[0];
+      if (!file) {
+        alert("Please select a file to upload.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          alert(`File uploaded successfully! File ID: ${data.id}`);
+        } else {
+          const error = await response.json();
+          alert(`Failed to upload file: ${error.message}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred during the upload.');
+      }
+    });
+  </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://creator.zoho.com/api/sdk/javascript/creator.js"></script>
+  <title>Upload File to Google Drive</title>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h1>My Drive</h1>
+  <button id="openUploadPopup">Upload File</button>
+  <div id="driveUI"></div>
+  <!--  -->
+  
+      <h1>Upload File to My Drive</h1>
+      <input type="file" id="fileInput" multiple>
+      <button id="uploadButton">Upload File</button>
+      <div id="statusMessage"></div>
+      <div id="uploadedFileDetails"></div>
+      <div id="show-credentials"></div>
+      <script src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
+      <script src="app.js"></script>
+</body>
+
+</html>
